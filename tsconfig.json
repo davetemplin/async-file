@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": false,
+    "sourceMap": true,
+    "declaration": true,
+    "target": "es6"
+  },
+  "files": [
+    "typings/tsd.d.ts",
+    "index.ts",
+    "test/test.ts"
+  ]
+}
