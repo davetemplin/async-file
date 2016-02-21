@@ -1,6 +1,6 @@
 {
   "name": "async-file",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Adapts the Node.js File System API (fs) for use with TypeScript async/await",
   "main": "index.js",
   "scripts": {
