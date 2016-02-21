@@ -171,10 +171,31 @@ export async function readTextFile(file: string|number, encoding?: Encoding|stri
 export async function writeTextFile(file: string|number, data: string, encoding?: Encoding|string, flags?: OpenFlags|string, mode?: string): Promise<void> {
     if (flags === undefined || flags === null)
         flags = OpenFlags.write;
-    return thunk<any>(fs.writeFile, [file, data, createOptions(encoding, flags, mode)]);
+    var options = createOptions(encoding, flags, mode);
+    if (options.flags[0] === 'a')
+        return thunk<any>(fs.appendFile, [file, data, options]);
+    else
+        return thunk<any>(fs.writeFile, [file, data, options]);
 }
 
-function createOptions(encoding?: Encoding|string, flags?: OpenFlags|string, mode?: string): Object {
+export async function del(path: string): Promise<void> {
+    return unlink(path);
+}
+
+export async function exists(path: string): Promise<boolean> { 
+    try {
+        await stat(path);
+        return true;
+    } 
+    catch (err) {
+        if (err.code === 'ENOENT')
+            return false;
+        else
+            throw err;            
+    }
+}
+
+function createOptions(encoding?: Encoding|string, flags?: OpenFlags|string, mode?: string): {mode: number, encoding: string, flags: string} {
     var options: any = {};
     
     if (encoding === undefined || encoding === null)
@@ -196,20 +217,7 @@ function createOptions(encoding?: Encoding|string, flags?: OpenFlags|string, mod
     return options;        
 }
 
-export async function exists(path: string): Promise<boolean> { 
-    try {
-        await stat(path);
-        return true;
-    } 
-    catch (err) {
-        if (err.code === 'ENOENT')
-            return false;
-        else
-            throw err;            
-    }
-}
-
-export function thunk<T>(target: Function, args: any[]|IArguments, context?: any, resolver?: {(): T}): Promise<T> {    
+function thunk<T>(target: Function, args: any[]|IArguments, context?: any, resolver?: {(): T}): Promise<T> {    
     return new Promise<T>((resolve, reject) => {
         target.apply(context, Array.prototype.slice.call(args).concat([(err: Error, result: T) => {
             if (err)
