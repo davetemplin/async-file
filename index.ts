@@ -172,7 +172,7 @@ export async function writeTextFile(file: string|number, data: string, encoding?
     if (flags === undefined || flags === null)
         flags = OpenFlags.write;
     var options = createOptions(encoding, flags, mode);
-    if (options.flags[0] === 'a')
+    if (options.flags && options.flags[0] === 'a')
         return thunk<any>(fs.appendFile, [file, data, options]);
     else
         return thunk<any>(fs.writeFile, [file, data, options]);
