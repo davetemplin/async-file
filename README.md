@@ -59,6 +59,7 @@ Make sure you're running Node v4 and TypeScript 1.8 or higher...
 $ node -v
 v4.2.6
 $ npm install -g typescript
+$ npm install -g tsd
 $ tsc -v
 Version 1.8.9
 ```
@@ -147,16 +148,16 @@ In addition to the wrapped functions above, the following convenience functions 
 
 Read a series of three text files, one at a time...
 ```js
-var data1 = await File.readTextFile('data1.csv');
-var data2 = await File.readTextFile('data2.csv');
-var data3 = await File.readTextFile('data3.csv');
+var data1 = await fs.readTextFile('data1.csv');
+var data2 = await fs.readTextFile('data2.csv');
+var data3 = await fs.readTextFile('data3.csv');
 ```
 
 Append a line into an arbitrary series of text files...
 ```js
 var files = ['data1.log', 'data2.log', 'data3.log'];
 for (var file of files)
-    await File.writeTextFile(file, '\nPASSED!\n', null, 'a');
+    await fs.writeTextFile(file, '\nPASSED!\n', null, 'a');
 ```
 
 Check for the existance of a file...
@@ -189,3 +190,4 @@ fs.unlink('/tmp/hello', err =>
 ```
 
 By design none of *"sync"* functions are exposed by the wrapper: fs.readFileSync, fs.writeFileSync, etc.
+
