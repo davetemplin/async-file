@@ -64,7 +64,7 @@ $ tsc -v
 Version 1.8.9
 ```
 
-Install package and required dependencies...
+Install ```async-file``` package and required ```node.d.ts``` dependencies...
 ```
 $ npm install async-file
 $ tsd install node
@@ -191,3 +191,9 @@ fs.unlink('/tmp/hello', err =>
 
 By design none of *"sync"* functions are exposed by the wrapper: fs.readFileSync, fs.writeFileSync, etc.
 
+## Related Wrappers
+Here are some other TypeScript async/await wrappers you may find useful...
+
+* [**async-parallel**](https://www.npmjs.com/package/async-parallel) simplifies invoking tasks in parallel
+* [**web-request**](https://www.npmjs.com/package/web-request) simplifies making web requests
+* [**async-fx**](https://www.npmjs.com/package/async-fx) bundles async-file, web-request, and async-parallel together in a single package
