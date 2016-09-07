@@ -22,7 +22,7 @@ export {
 } from 'fs';
 
 export function access(path: string, mode?: number|string): Promise<void> { return thunk<void>(fs.access, arguments); }
-export function appendFile(filename: string, data: any, options?: { encoding?: 'ascii'|'base64'|'binary'|'hex'|'ucs2'|'utf16le'|'utf8'; mode?: number|string; flag?: 'r'|'r+'|'rs'|'rs+'|'w'|'wx'|'w+'|'wx+'|'a'|'ax'|'a+'|'ax+'; }): Promise<void> { return thunk<void>(fs.appendFile, arguments); }
+export function appendFile(file: string|number, data: any, options?: { encoding?: 'ascii'|'base64'|'binary'|'hex'|'ucs2'|'utf16le'|'utf8'; mode?: number|string; flag?: 'r'|'r+'|'rs'|'rs+'|'w'|'wx'|'w+'|'wx+'|'a'|'ax'|'a+'|'ax+'; }): Promise<void> { return thunk<void>(fs.appendFile, arguments); }
 export function chmod(path: string, mode: number|string): Promise<void> { return thunk<void>(fs.chmod, arguments); }
 export function chown(path: string, uid: number, gid: number): Promise<void> { return thunk<void>(fs.chown, arguments); }
 export function close(fd: number): Promise<void> { return thunk<void>(fs.close, arguments); }
