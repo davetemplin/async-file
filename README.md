@@ -42,7 +42,7 @@ import * as fs from 'async-file';
 (async function () {
     var data = await fs.readFile('data.csv', 'utf8');
     await fs.rename('/tmp/hello', '/tmp/world');
-    await fs.access('/etc/passd', fs.R_OK | fs.W_OK);
+    await fs.access('/etc/passd', fs.constants.R_OK | fs.constants.W_OK);
     await fs.appendFile('message.txt', 'data to append');
     await fs.unlink('/tmp/hello');
 })();
@@ -89,50 +89,51 @@ $ node index.js
 ## Wrapped Functions
 The following is a list of all wrapped functions...
 
-* [```fs.access(path[, mode]): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_access_path_mode_callback)
-* [```fs.appendFile(file, data[, options]): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_appendfile_file_data_options_callback)
-* [```fs.chmod(path, mode): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_chmod_path_mode_callback)
-* [```fs.chown(path, uid, gid): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_chown_path_uid_gid_callback)
-* [```fs.close(fd): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_close_fd_callback)
-* [```fs.fchmod(fd, mode): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_fchmod_fd_mode_callback)
-* [```fs.fchown(fd, uid, gid): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_fchown_fd_uid_gid_callback)
-* [```fs.fstat(fd): Promise<Stats>```](https://nodejs.org/api/fs.html#fs_fs_fstat_fd_callback)
-* [```fs.fsync(fd): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_fsync_fd_callback)
-* [```fs.ftruncate(fd, len): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_ftruncate_fd_len_callback)
-* [```fs.futimes(fd, atime, mtime): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_futimes_fd_atime_mtime_callback)
-* [```fs.lchmod(path, mode): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_lchmod_path_mode_callback)
-* [```fs.lchown(path, uid, gid): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_lchown_path_uid_gid_callback)
-* [```fs.link(srcpath, dstpath): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_link_srcpath_dstpath_callback)
-* [```fs.lstat(path): Promise<Stats>```](https://nodejs.org/api/fs.html#fs_fs_lstat_path_callback)
-* [```fs.mkdir(path[, mode]): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_mkdir_path_mode_callback)
-* [```fs.mkdtemp(prefix): Promise<string>```](https://nodejs.org/api/fs.html#fs_fs_mkdtemp_prefix_callback)
-* [```fs.open(path, flags[, mode]): Promise<number>```](https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback)
-* [```fs.read(fd, buffer, offset, length, position): Promise<ReadResult>```](https://nodejs.org/api/fs.html#fs_fs_read_fd_buffer_offset_length_position_callback)
-* [```fs.readdir(path): Promise<string[]>```](https://nodejs.org/api/fs.html#fs_fs_readdir_path_callback)
-* [```fs.readFile(file[, options]): Promise<any>```](https://nodejs.org/api/fs.html#fs_fs_readfile_file_options_callback)
-* [```fs.readlink(path): Promise<string>```](https://nodejs.org/api/fs.html#fs_fs_readlink_path_callback)
-* [```fs.realpath(path[, cache]): Promise<string>```](https://nodejs.org/api/fs.html#fs_fs_realpath_path_cache_callback)
-* [```fs.rename(oldPath, newPath): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_rename_oldpath_newpath_callback)
-* [```fs.rmdir(path): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_rmdir_path_callback)
-* [```fs.stat(path): Promise<Stats>```](https://nodejs.org/api/fs.html#fs_fs_stat_path_callback)
-* [```fs.symlink(target, path[, type]): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_symlink_target_path_type_callback)
-* [```fs.truncate(path, len): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_truncate_path_len_callback)
-* [```fs.unlink(path): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_unlink_path_callback)
-* [```fs.utimes(path, atime, mtime): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_utimes_path_atime_mtime_callback)
-* [```fs.write(fd, buffer, offset, length[, position]): Promise<WriteResult>```](https://nodejs.org/api/fs.html#fs_fs_write_fd_data_position_encoding_callback)
-* [```fs.write(fd, data[, position[, encoding]]): Promise<WriteResult>```](https://nodejs.org/api/fs.html#fs_fs_write_fd_data_position_encoding_callback)
-* [```fs.writeFile(file, data[, options]): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
+* [```fs.access(path: string, mode?: number|string): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_access_path_mode_callback)
+* [```fs.appendFile(file: string|number, data: any, options?: { encoding?: string; mode?: number|string; flag?: string; }): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_appendfile_file_data_options_callback)
+* [```fs.chmod(path: string, mode: number|string): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_chmod_path_mode_callback)
+* [```fs.chown(path: string, uid: number, gid: number): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_chown_path_uid_gid_callback)
+* [```fs.close(fd: number): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_close_fd_callback)
+* [```fs.fchmod(fd: number, mode: number|string): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_fchmod_fd_mode_callback)
+* [```fs.fchown(fd: number, uid: number, gid: number): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_fchown_fd_uid_gid_callback)
+* [```fs.fstat(fd: number): Promise<Stats>```](https://nodejs.org/api/fs.html#fs_fs_fstat_fd_callback)
+* [```fs.fsync(fd: number): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_fsync_fd_callback)
+* [```fs.ftruncate(fd: number, len?: number): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_ftruncate_fd_len_callback)
+* [```fs.futimes(fd: number, atime: Date|number, mtime: Date|number): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_futimes_fd_atime_mtime_callback)
+* [```fs.lchmod(path: string, mode: number|string): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_lchmod_path_mode_callback)
+* [```fs.lchown(path: string, uid: number, gid: number): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_lchown_path_uid_gid_callback)
+* [```fs.link(srcpath: string, dstpath: string): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_link_srcpath_dstpath_callback)
+* [```fs.lstat(path: string): Promise<Stats>```](https://nodejs.org/api/fs.html#fs_fs_lstat_path_callback)
+* [```fs.mkdir(path: string, mode?: number|string): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_mkdir_path_mode_callback)
+* [```fs.mkdtemp(prefix: string): Promise<string>```](https://nodejs.org/api/fs.html#fs_fs_mkdtemp_prefix_callback)
+* [```fs.open(path: string, flags: string, mode?: number|string): Promise<number>```](https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback)
+* [```fs.read(fd: number, buffer: Buffer, offset: number, length: number, position: number): Promise<ReadResult>```](https://nodejs.org/api/fs.html#fs_fs_read_fd_buffer_offset_length_position_callback)
+* [```fs.readdir(path: string): Promise<string[]>```](https://nodejs.org/api/fs.html#fs_fs_readdir_path_callback)
+* [```fs.readFile(file: string|number, options?: {encoding?: string, flag?: string}|string): Promise<any>```](https://nodejs.org/api/fs.html#fs_fs_readfile_file_options_callback)
+* [```fs.readlink(path: string): Promise<string>```](https://nodejs.org/api/fs.html#fs_fs_readlink_path_callback)
+* [```fs.realpath(path: string, cache?: {[path: string]: string}): Promise<string>```](https://nodejs.org/api/fs.html#fs_fs_realpath_path_cache_callback)
+* [```fs.rename(oldPath: string, newPath: string): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_rename_oldpath_newpath_callback)
+* [```fs.rmdir(path: string): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_rmdir_path_callback)
+* [```fs.stat(path: string): Promise<Stats>```](https://nodejs.org/api/fs.html#fs_fs_stat_path_callback)
+* [```fs.symlink(srcpath: string, dstpath: string, type?: string): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_symlink_target_path_type_callback)
+* [```fs.truncate(path: string, len?: number): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_truncate_path_len_callback)
+* [```fs.unlink(path: string): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_unlink_path_callback)
+* [```fs.utimes(path: string, atime: Date|number, mtime: Date|number): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_utimes_path_atime_mtime_callback)
+* [```fs.write(fd: number, buffer: Buffer, offset?: number, length?: number, position?: number): Promise<{written: number; buffer: Buffer}>```](https://nodejs.org/api/fs.html#fs_fs_write_fd_data_position_encoding_callback)
+* [```fs.write(fd: number, data: any, offset?: number, position?: number, encoding?: string): Promise<{written: number; buffer: Buffer}>```](https://nodejs.org/api/fs.html#fs_fs_write_fd_data_position_encoding_callback)
+* [```fs.write(fd: number): Promise<{written: number; buffer: Buffer}>```](https://nodejs.org/api/fs.html#fs_fs_write_fd_data_position_encoding_callback)
+* [```fs.writeFile(file: string|number, data: string|any, options?: {encoding?: string, flag?: string, mode?: number|string}): Promise<void>```](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
 
 ## Convenience Functions
 In addition to the wrapped functions above, the following convenience functions are provided...
 
-* ```fs.createDirectory(path[, mode]): Promise<void>```
-* ```fs.delete(path): Promise<void>```
-* ```fs.exists(path): Promise<boolean>```
-* ```fs.readTextFile(file[, encoding, flags]): Promise<string>```
-* ```fs.writeTextFile(file, data[, encoding, mode]): Promise<void>```
-* ```fs.mkdirp(path): Promise<void>```
-* ```fs.rimraf(path): Promise<void>```
+* ```fs.createDirectory(path, mode?: number|string): Promise<void>```
+* ```fs.delete(path: string): Promise<void>```
+* ```fs.exists(path: string): Promise<boolean>```
+* ```fs.readTextFile(file: string|number, encoding?: string, flags?: string): Promise<string>```
+* ```fs.writeTextFile(file: string|number, data: string, encoding?: string, mode?: string): Promise<void>```
+* ```fs.mkdirp(path: string): Promise<void>```
+* ```fs.rimraf(path: string): Promise<void>```
 
 ```fs.createDirectory``` creates a directory recursively *(like [mkdirp](https://www.npmjs.com/package/mkdirp))*.
 
@@ -196,4 +197,3 @@ Here are some other TypeScript async/await wrappers you may find useful...
 
 * [**async-parallel**](https://www.npmjs.com/package/async-parallel) simplifies invoking tasks in parallel
 * [**web-request**](https://www.npmjs.com/package/web-request) simplifies making web requests
-* [**async-fx**](https://www.npmjs.com/package/async-fx) bundles async-file, web-request, and async-parallel together in a single package

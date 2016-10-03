@@ -14,11 +14,8 @@ export {
     Stats, 
     FSWatcher, 
     ReadStream, 
-    WriteStream, 
-    F_OK, 
-    R_OK, 
-    W_OK, 
-    X_OK
+    WriteStream,
+    constants 
 } from 'fs';
 
 export function access(path: string, mode?: number|string): Promise<void> { return thunk<void>(fs.access, arguments); }
@@ -56,9 +53,9 @@ export function symlink(srcpath: string, dstpath: string, type?: string): Promis
 export function truncate(path: string, len?: number): Promise<void> { return thunk<void>(fs.truncate, arguments); }
 export function unlink(path: string): Promise<void> { return thunk<void>(fs.unlink, arguments); }
 export function utimes(path: string, atime: Date|number, mtime: Date|number): Promise<void> { return thunk<void>(fs.utimes, arguments); }
-export function write(fd: number, buffer: Buffer, offset: number, length: number, position?: number): Promise<{written: number; buffer: Buffer;}>;
-export function write(fd: number, data: any, offset?: number, encoding?: 'ascii'|'base64'|'binary'|'hex'|'ucs2'|'utf16le'|'utf8'): Promise<{written: number; buffer: Buffer;}>;
-export function write(fd: number): Promise<{written: number; buffer: Buffer;}> { return thunk<{written: number; buffer: Buffer;}>(fs.write, arguments, null, function () { return { written: <number>arguments[1], buffer: <Buffer>arguments[2] }; }); }
+export function write(fd: number, buffer: Buffer, offset: number, length: number, position?: number): Promise<{written: number; buffer: Buffer}>;
+export function write(fd: number, data: any, offset?: number, encoding?: 'ascii'|'base64'|'binary'|'hex'|'ucs2'|'utf16le'|'utf8'): Promise<{written: number; buffer: Buffer}>;
+export function write(fd: number): Promise<{written: number; buffer: Buffer;}> { return thunk<{written: number; buffer: Buffer}>(fs.write, arguments, null, function () { return { written: <number>arguments[1], buffer: <Buffer>arguments[2] }; }); }
 
 export function writeFile(file: string|number, data: string|any, 
     options?: { 
@@ -81,7 +78,7 @@ export function readTextFile(file: string|number, encoding?: 'ascii'|'base64'|'b
 export function writeTextFile(file: string|number, data: string, encoding?: 'ascii'|'base64'|'binary'|'hex'|'ucs2'|'utf16le'|'utf8', flags?: 'r'|'r+'|'rs'|'rs+'|'w'|'wx'|'w+'|'wx+'|'a'|'ax'|'a+'|'ax+', mode?: number|string): Promise<void> {
     if (encoding === undefined)
         encoding = 'utf8';
-    if (flags === undefined || flags === null || flags === '')
+    if (flags === undefined || flags === null)
         flags = 'w';
     var options = {encoding: encoding, flags: flags, mode: mode};
     if (flags[0] === 'a')
