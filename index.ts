@@ -128,7 +128,7 @@ function thunk<T>(target: Function, args: any[]|IArguments, context?: any, resol
             if (err)
                 reject(err);
             else if (resolver)
-                resolver.apply(context, arguments);
+                resolve(resolver.apply(context, arguments));
             else
                 resolve(result);
         }]));
