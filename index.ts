@@ -14,8 +14,7 @@ export {
     Stats, 
     FSWatcher, 
     ReadStream, 
-    WriteStream,
-    constants 
+    WriteStream    
 } from 'fs';
 
 export function access(path: string, mode?: number|string): Promise<void> { return thunk<void>(fs.access, arguments); }
