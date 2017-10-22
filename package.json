@@ -1,6 +1,6 @@
 {
   "name": "async-file",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Adapts the Node.js File System API (fs) for use with TypeScript async/await",
   "main": "index.js",
   "scripts": {
@@ -30,6 +30,10 @@
   },
   "homepage": "https://github.com/davetemplin/async-file#readme",
   "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.43",
+    "@types/node": "^8.0.46",
+    "@types/rimraf": "^2.0.2",
     "chai": "^3.4.1",
     "mocha": "^2.3.4"
   },

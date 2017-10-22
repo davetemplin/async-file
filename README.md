@@ -54,18 +54,11 @@ Other than the modified async function signatures and added convenience function
 
 ## Getting Started
 
-Make sure you're running Node v4 and TypeScript 1.8 or higher...
-```
-$ node -v
-v4.2.6
-$ npm install -g typescript
-$ npm install -g tsd
-$ tsc -v
-Version 1.8.9
-```
+Requires Node v4 and TypeScript 2.1 or higher.
 
 Install ```async-file``` package and required ```node.d.ts``` dependencies...
 ```
+$ npm install @types/node
 $ npm install async-file
 $ tsd install node
 ```
@@ -129,6 +122,7 @@ In addition to the wrapped functions above, the following convenience functions 
 
 * ```fs.createDirectory(path, mode?: number|string): Promise<void>```
 * ```fs.delete(path: string): Promise<void>```
+* ```fs.end(w: WritableStream, chunk?: any, encoding?: string): Promise<void>```
 * ```fs.exists(path: string): Promise<boolean>```
 * ```fs.readTextFile(file: string|number, encoding?: string, flags?: string): Promise<string>```
 * ```fs.writeTextFile(file: string|number, data: string, encoding?: string, mode?: string): Promise<void>```
@@ -138,6 +132,8 @@ In addition to the wrapped functions above, the following convenience functions 
 ```fs.createDirectory``` creates a directory recursively *(like [mkdirp](https://www.npmjs.com/package/mkdirp))*.
 
 ```fs.delete``` deletes any file or directory, performing a deep delete on non-empty directories *(wraps [rimraf](https://www.npmjs.com/package/rimraf))*.
+
+```fs.end``` ends a writeable stream returning a promise.
 
 ```fs.exists``` implements the recommended solution of opening the file and returning ```true``` when the ```ENOENT``` error results.
  
@@ -191,9 +187,3 @@ fs.unlink('/tmp/hello', err =>
 ```
 
 By design none of *"sync"* functions are exposed by the wrapper: fs.readFileSync, fs.writeFileSync, etc.
-
-## Related Wrappers
-Here are some other TypeScript async/await wrappers you may find useful...
-
-* [**async-parallel**](https://www.npmjs.com/package/async-parallel) simplifies invoking tasks in parallel
-* [**web-request**](https://www.npmjs.com/package/web-request) simplifies making web requests

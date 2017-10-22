@@ -4,6 +4,6 @@
 import * as fs from './index';
 
 (async function () {
-    await fs.writeTextFile('data.log', '\nPASSED!\n', null, 'a');
+    await fs.writeTextFile('data.log', '\nPASSED!\n', undefined, 'a');
     process.exit();
 })();
